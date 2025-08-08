@@ -45,6 +45,10 @@
       color: var(--accent-light) !important;
       text-shadow: 0 0 6px var(--accent-shadow);
     }
+    /* Navbar toggler icon color fix on dark background */
+    .navbar-toggler-icon {
+      filter: invert(1);
+    }
     .card {
       background: #121212;
       border: none;
@@ -82,6 +86,17 @@
       position: relative;
       overflow: hidden;
     }
+    #matrix-canvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      opacity: 0.15; /* Low opacity so it's not too distracting */
+    }
+    .quote-text, .quote-divider, .quote-translation {
+      position: relative;
+      z-index: 1;
+    }
     .quote-text {
       font-size: 1.6rem;
       white-space: pre;
@@ -98,33 +113,15 @@
       opacity: 0;
       animation-delay: 2.5s;
     }
-    #quote-section::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: repeating-linear-gradient(
-        180deg,
-        rgba(255,255,255,0.03) 0px,
-        rgba(255,255,255,0.03) 1px,
-        transparent 1px,
-        transparent 3px
-      );
-      animation: scrollBG 10s linear infinite;
-    }
-    @keyframes scrollBG {
-      from { background-position: 0 0; }
-      to { background-position: 0 100px; }
-    }
   </style>
 </head>
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg sticky-top">
+  <nav class="navbar navbar-expand-lg sticky-top" role="navigation" aria-label="Main navigation">
     <div class="container">
       <a class="navbar-brand" href="#">Sakin Chowdhury</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navMenu">
@@ -135,7 +132,7 @@
           <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
           <li class="nav-item">
-            <a class="btn btn-outline-light ms-3" href="Sakin_Chowdhury_Resume.pdf" target="_blank">
+            <a class="btn btn-outline-light ms-3" href="Sakin_Chowdhury_Resume.pdf" target="_blank" aria-label="Download Resume">
               <i class="fas fa-file-download"></i> Resume
             </a>
           </li>
@@ -144,11 +141,12 @@
     </div>
   </nav>
 
-  <!-- Quote Section -->
-  <section id="quote-section" class="py-5 text-center">
+  <!-- Quote Section with Matrix Background -->
+  <section id="quote-section" class="py-5 text-center" aria-label="Inspirational quote">
+    <canvas id="matrix-canvas"></canvas>
     <div class="container">
       <pre class="quote-text" id="latin-quote"></pre>
-      <hr class="quote-divider">
+      <hr class="quote-divider" />
       <p class="quote-translation animate__animated animate__fadeIn" id="translation-text">I shall either find a way or make one</p>
     </div>
   </section>
@@ -157,19 +155,19 @@
   <main class="container py-5">
 
     <!-- About -->
-    <section id="about" class="mb-5 animate__animated animate__fadeInUp">
+    <section id="about" class="mb-5 animate__animated animate__fadeInUp" tabindex="0">
       <h2>About Me</h2>
       <div class="card">
         <p>Hey, I’m Sakin Chowdhury — <span class="typed-text"></span></p>
         <p>
-          I’m a Computer Systems BTech graduate (3.81 GPA) specializing in scalable web applications, API integrations, and user-friendly UI/UX. 
+          I’m a Computer Systems BTech graduate (Summa Cum Laude) specializing in scalable web applications, API integrations, and user-friendly UI/UX. 
           With experience in Java, Python, and Ruby on Rails, I’ve built tools in collaboration with industry professionals to improve accessibility and functionality.
         </p>
       </div>
     </section>
 
     <!-- Skills -->
-    <section id="skills" class="mb-5 animate__animated animate__fadeInUp">
+    <section id="skills" class="mb-5 animate__animated animate__fadeInUp" tabindex="0">
       <h2>Skills</h2>
       <div class="card">
         <h5>Technical</h5>
@@ -189,14 +187,14 @@
     </section>
 
     <!-- Projects -->
-    <section id="projects" class="mb-5 animate__animated animate__fadeInUp">
+    <section id="projects" class="mb-5 animate__animated animate__fadeInUp" tabindex="0">
       <h2>Projects</h2>
       <div class="row g-4">
         <div class="col-md-6">
           <div class="card">
             <h5>AMFAA Web Application</h5>
             <p>Developed scalable features in Ruby on Rails with rich text editing, enhancing artist engagement and accessibility. Collaborated with a Google Senior Software Engineer.</p>
-            <p><strong>Tech:</strong> Ruby on Rails, AWS, MongoDB</p>
+            <p><strong>Tech:</strong> Ruby on Rails</p>
           </div>
         </div>
         <div class="col-md-6">
@@ -210,7 +208,7 @@
     </section>
 
     <!-- Experience -->
-    <section id="experience" class="mb-5 animate__animated animate__fadeInUp">
+    <section id="experience" class="mb-5 animate__animated animate__fadeInUp" tabindex="0">
       <h2>Experience</h2>
       <div class="card mb-3">
         <h5>Business Development / Application Developer Intern</h5>
@@ -231,13 +229,13 @@
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="animate__animated animate__fadeInUp">
+    <section id="contact" class="animate__animated animate__fadeInUp" tabindex="0">
       <h2>Contact</h2>
       <div class="card">
         <ul class="list-unstyled">
           <li><i class="fas fa-envelope"></i> <a href="mailto:sakinhchowdhury@gmail.com">Email Me</a></li>
-          <li><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/sakin-chowdhury-75a94924a/" target="_blank">LinkedIn</a></li>
-          <li><i class="fab fa-github"></i> <a href="https://github.com/sakinc2" target="_blank">GitHub</a></li>
+          <li><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/sakin-chowdhury-75a94924a/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><i class="fab fa-github"></i> <a href="https://github.com/sakinc2" target="_blank" rel="noopener noreferrer">GitHub</a></li>
         </ul>
       </div>
     </section>
@@ -251,6 +249,8 @@
       strings: ["a software developer.", "a problem solver.", "a lifelong learner.", "your next great teammate."],
       typeSpeed: 60, backSpeed: 40, backDelay: 1500, loop: true
     });
+
+    // Typewriter effect for Latin quote
     document.addEventListener("DOMContentLoaded", function(){
       let latinText = "Aut inveniam viam aut faciam";
       let i = 0;
@@ -267,7 +267,53 @@
       }
       typeWriter();
     });
+
+    // Matrix background animation using requestAnimationFrame
+    const canvas = document.getElementById("matrix-canvas");
+    const ctx = canvas.getContext("2d");
+
+    const fontSize = 14;
+    let columns;
+    let drops;
+
+    function setupCanvas() {
+      canvas.height = document.getElementById("quote-section").offsetHeight;
+      canvas.width = document.getElementById("quote-section").offsetWidth;
+      columns = Math.floor(canvas.width / fontSize);
+      drops = Array(columns).fill(1);
+    }
+
+    const letters = "アァイィウヴエェオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモヤユヨラリルレロワヲンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const matrix = letters.split("");
+
+    function drawMatrix() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#cfd1d4"; // metallic grey matrix text
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = matrix[Math.floor(Math.random() * matrix.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+      requestAnimationFrame(drawMatrix);
+    }
+
+    window.addEventListener("resize", () => {
+      setupCanvas();
+    });
+
+    // Initialize
+    setupCanvas();
+    drawMatrix();
   </script>
 
 </body>
 </html>
+<!-- End of HTML Document -->
+<!-- This code is a complete HTML document for a personal portfolio website, featuring a responsive design, a matrix background animation, and sections for about, skills, projects, experience, and contact information.
