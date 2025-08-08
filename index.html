@@ -14,186 +14,94 @@
   <!-- Animate.css -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
-  <!-- Google Fonts: Poppins & Roboto Mono -->
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet" />
 
   <style>
-    /* Root Styles */
+    /* Existing Styles ... */
     body {
       background: #000;
       color: #ddd;
-      font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Poppins', sans-serif;
       min-height: 100vh;
       overflow-x: hidden;
       line-height: 1.6;
       scroll-behavior: smooth;
     }
-
-    /* Navbar */
+    :root {
+      --accent-color: #9a8caa;
+      --accent-shadow: rgba(154, 140, 170, 0.5);
+      --accent-light: #bcb4d4;
+    }
     .navbar {
       background: rgba(18,18,18,0.95);
-      box-shadow: 0 2px 10px rgba(102,204,255,0.2);
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      z-index: 10;
+      box-shadow: 0 2px 10px var(--accent-shadow);
     }
     .navbar-brand {
       font-family: 'Roboto Mono', monospace;
       font-weight: 700;
       font-size: 1.8rem;
-      color: #66ccff !important;
+      color: var(--accent-color) !important;
       letter-spacing: 0.1em;
     }
-    .nav-link {
-      color: #ccc !important;
-      font-weight: 600;
-      margin-left: 1rem;
-      transition: color 0.3s ease;
-    }
-    .nav-link:hover {
-      color: #66ccff !important;
-      text-shadow: 0 0 6px #66ccff;
-    }
-    .navbar-toggler-icon {
-      filter: invert(1);
-    }
-
-    /* Animated SVG wires */
-    #animated-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 160px;
-      pointer-events: none;
-      z-index: 1;
-      overflow: visible;
-    }
-    .line {
-      stroke: #66ccff;
-      stroke-width: 1.2;
-      stroke-opacity: 0.15;
-      animation: moveLines 12s linear infinite;
-    }
-    .line:nth-child(odd) {
-      animation-duration: 16s;
-    }
-    .line:nth-child(even) {
-      animation-duration: 13s;
-    }
-    @keyframes moveLines {
-      0% { stroke-dashoffset: 0; }
-      100% { stroke-dashoffset: -1200; }
-    }
-
-    /* Main Container */
-    main.container {
-      padding-top: 200px;
-      max-width: 800px;
-    }
-
-    /* Section Headers */
-    h2 {
-      font-family: 'Roboto Mono', monospace;
-      font-weight: 700;
-      color: #66ccff;
-      letter-spacing: 0.1em;
-      margin-bottom: 1.5rem;
-      border-left: 4px solid #66ccff;
-      padding-left: 0.8rem;
-    }
-
-    /* Cards */
+    .nav-link { color: #ccc !important; font-weight: 600; margin-left: 1rem; }
+    .nav-link:hover { color: var(--accent-light) !important; text-shadow: 0 0 6px var(--accent-shadow); }
     .card {
       background: #121212;
       border: none;
       border-radius: 14px;
-      box-shadow: 0 8px 24px rgba(102,204,255,0.15);
+      box-shadow: 0 8px 24px var(--accent-shadow);
       color: #ddd;
       padding: 2rem;
       transition: all 0.3s ease;
     }
-    .card:hover {
-      box-shadow: 0 12px 40px rgba(102,204,255,0.35);
-      transform: translateY(-8px);
-    }
-
-    /* Typed Text */
-    .typed-text {
-      color: #66ccff;
-      font-weight: 700;
+    .card:hover { box-shadow: 0 12px 40px var(--accent-shadow); transform: translateY(-8px); }
+    h2 {
       font-family: 'Roboto Mono', monospace;
-      font-size: 1.3rem;
-      display: inline-block;
-      min-height: 1.5em;
-      margin-left: 8px;
+      font-weight: 700;
+      color: var(--accent-color);
+      border-left: 4px solid var(--accent-color);
+      padding-left: 0.8rem;
+      margin-bottom: 1.5rem;
     }
-
-    /* Contact List */
-    #contact ul {
-      list-style: none;
-      padding-left: 0;
-    }
-    #contact li {
-      margin-bottom: 1rem;
-      font-size: 1.1rem;
-    }
-    #contact li i {
-      color: #66ccff;
-      margin-right: 0.7rem;
-      width: 20px;
-      text-align: center;
-    }
-    #contact a {
-      color: #66ccff;
-      text-decoration: none;
-      transition: text-shadow 0.3s ease;
-    }
-    #contact a:hover {
-      text-shadow: 0 0 8px #66ccff;
-    }
-
-    /* Responsive tweaks */
-    @media (max-width: 576px) {
-      main.container {
-        padding-top: 150px;
-        padding-left: 1rem;
-        padding-right: 1rem;
-      }
-      .navbar-brand {
-        font-size: 1.5rem;
-      }
+    .badge {
+      background: var(--accent-color);
+      color: #000;
+      font-weight: 600;
+      margin: 0.2rem;
+      padding: 0.6rem 0.8rem;
+      border-radius: 8px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Animated SVG background -->
-  <svg id="animated-bg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1000 160">
-    <line class="line" x1="0" y1="25" x2="1000" y2="25" stroke-dasharray="22 10" />
-    <line class="line" x1="0" y1="60" x2="1000" y2="60" stroke-dasharray="18 8" />
-    <line class="line" x1="0" y1="95" x2="1000" y2="95" stroke-dasharray="25 15" />
-    <line class="line" x1="0" y1="130" x2="1000" y2="130" stroke-dasharray="12 12" />
-  </svg>
-
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg sticky-top shadow-sm">
+  <nav class="navbar navbar-expand-lg sticky-top">
     <div class="container">
       <a class="navbar-brand" href="#">Sakin Chowdhury</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navMenu">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item">
+            <a class="btn btn-outline-light ms-3" href="Sakin_Chowdhury_Resume.pdf" target="_blank">
+              <i class="fas fa-file-download"></i> Resume
+            </a>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- Main Content -->
-  <main class="container">
+  <!-- Main -->
+  <main class="container py-5">
 
     <!-- About -->
     <section id="about" class="mb-5 animate__animated animate__fadeInUp">
@@ -201,20 +109,82 @@
       <div class="card">
         <p>Hey, I’m Sakin Chowdhury — <span class="typed-text"></span></p>
         <p>
-          Passionate software developer building clean, efficient solutions. I enjoy crafting modern UIs paired with solid backend logic.
-          This is my corner of the internet where I share my work and ideas.
+          I’m a Computer Systems BTech graduate (3.81 GPA) specializing in scalable web applications, API integrations, and user-friendly UI/UX. 
+          With experience in Java, Python, and Ruby on Rails, I’ve built tools in collaboration with industry professionals to improve accessibility and functionality.
         </p>
       </div>
     </section>
 
+    <!-- Skills -->
+    <section id="skills" class="mb-5 animate__animated animate__fadeInUp">
+      <h2>Skills</h2>
+      <div class="card">
+        <h5>Technical</h5>
+        <div>
+          <span class="badge">HTML</span><span class="badge">CSS</span><span class="badge">Java</span>
+          <span class="badge">Python</span><span class="badge">JavaScript</span><span class="badge">Ruby on Rails</span>
+          <span class="badge">SQL</span><span class="badge">MongoDB</span><span class="badge">AWS</span>
+          <span class="badge">API Integration</span><span class="badge">React (Basic)</span>
+        </div>
+        <h5 class="mt-4">Soft Skills</h5>
+        <div>
+          <span class="badge">Problem-Solving</span><span class="badge">Leadership</span>
+          <span class="badge">Adaptability</span><span class="badge">Detail-Oriented</span>
+          <span class="badge">Team Collaboration</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="mb-5 animate__animated animate__fadeInUp">
+      <h2>Projects</h2>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="card">
+            <h5>AMFAA Web Application</h5>
+            <p>Developed scalable features in Ruby on Rails with rich text editing, enhancing artist engagement and accessibility. Collaborated with a Google Senior Software Engineer.</p>
+            <p><strong>Tech:</strong> Ruby on Rails, AWS, MongoDB</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <h5>Drivers Cooperative Benefits Portal</h5>
+            <p>Integrated APIs, optimized data handling, and deployed features on AWS to improve the driver benefits platform.</p>
+            <p><strong>Tech:</strong> JavaScript, MongoDB, AWS</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="mb-5 animate__animated animate__fadeInUp">
+      <h2>Experience</h2>
+      <div class="card mb-3">
+        <h5>Business Development / Application Developer Intern</h5>
+        <p><em>All My Friends Are Artists — Jul 2025 - Aug 2025</em></p>
+        <ul>
+          <li>Built and deployed user-facing features in Ruby on Rails.</li>
+          <li>Collaborated with industry professionals to improve artist tools.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h5>Software Engineer Intern</h5>
+        <p><em>The Drivers Cooperative — Jul 2024 - Aug 2024</em></p>
+        <ul>
+          <li>Enhanced web applications and integrated APIs for benefits portal.</li>
+          <li>Deployed APIs on AWS and managed MongoDB databases.</li>
+        </ul>
+      </div>
+    </section>
+
     <!-- Contact -->
-    <section id="contact" class="animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+    <section id="contact" class="animate__animated animate__fadeInUp">
       <h2>Contact</h2>
       <div class="card">
-        <ul>
-          <li><i class="fas fa-envelope"></i><a href="mailto:sakinhchowdhury@gmail.com">Email Me</a></li>
-          <li><i class="fab fa-linkedin"></i><a href="https://www.linkedin.com/in/sakin-chowdhury-75a94924a/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-          <li><i class="fab fa-github"></i><a href="https://github.com/sakinc2" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <ul class="list-unstyled">
+          <li><i class="fas fa-envelope"></i> <a href="mailto:sakinhchowdhury@gmail.com">Email Me</a></li>
+          <li><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/sakin-chowdhury-75a94924a/" target="_blank">LinkedIn</a></li>
+          <li><i class="fab fa-github"></i> <a href="https://github.com/sakinc2" target="_blank">GitHub</a></li>
         </ul>
       </div>
     </section>
@@ -225,17 +195,9 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   <script>
-    var typed = new Typed('.typed-text', {
-      strings: [
-        "a software developer.",
-        "a problem solver.",
-        "a lifelong learner.",
-        "your next great teammate."
-      ],
-      typeSpeed: 60,
-      backSpeed: 40,
-      backDelay: 1500,
-      loop: true
+    new Typed('.typed-text', {
+      strings: ["a software developer.", "a problem solver.", "a lifelong learner.", "your next great teammate."],
+      typeSpeed: 60, backSpeed: 40, backDelay: 1500, loop: true
     });
   </script>
 
