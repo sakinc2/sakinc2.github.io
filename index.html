@@ -15,10 +15,14 @@
       color: #eee;
       min-height: 100vh;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      position: relative;
+      overflow-x: hidden;
     }
     /* Navbar dark with subtle transparency */
     .navbar {
       background-color: rgba(18, 18, 18, 0.95);
+      position: relative;
+      z-index: 10;
     }
     /* Black card style */
     .card {
@@ -49,10 +53,53 @@
       font-weight: 700;
       color: #66ccff;
     }
+
+    /* Animated wire/code background container */
+    #animated-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 150px;
+      pointer-events: none;
+      z-index: 1;
+      overflow: visible;
+    }
+    /* Thin horizontal lines */
+    .line {
+      stroke: #66ccff;
+      stroke-width: 1;
+      stroke-opacity: 0.3;
+      animation: moveLines 10s linear infinite;
+    }
+    /* Different speeds for each line */
+    .line:nth-child(odd) {
+      animation-duration: 15s;
+    }
+    .line:nth-child(even) {
+      animation-duration: 12s;
+    }
+
+    @keyframes moveLines {
+      0% {
+        stroke-dashoffset: 0;
+      }
+      100% {
+        stroke-dashoffset: -1000;
+      }
+    }
   </style>
 </head>
 <body>
   
+  <!-- Animated SVG background -->
+  <svg id="animated-bg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1000 150" >
+    <line class="line" x1="0" y1="20" x2="1000" y2="20" stroke-dasharray="20 10" />
+    <line class="line" x1="0" y1="50" x2="1000" y2="50" stroke-dasharray="15 5" />
+    <line class="line" x1="0" y1="80" x2="1000" y2="80" stroke-dasharray="25 15" />
+    <line class="line" x1="0" y1="110" x2="1000" y2="110" stroke-dasharray="10 10" />
+  </svg>
+
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg sticky-top">
     <div class="container">
@@ -63,7 +110,6 @@
       <div class="collapse navbar-collapse" id="navMenu">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
         </ul>
       </div>
@@ -78,28 +124,6 @@
       <h2>About Me</h2>
       <div class="card p-4 mb-5">
         <p>Hello! I'm Sakin, a passionate software developer focused on building clean and efficient solutions. I love working on projects that combine modern UI with strong backend logic. Welcome to my portfolio.</p>
-      </div>
-    </section>
-    
-    <!-- Projects Section -->
-    <section id="projects">
-      <h2>Projects</h2>
-      <div class="row g-4">
-        <div class="col-md-6 col-lg-4">
-          <div class="card p-3">
-            <h5>Project One</h5>
-            <p>A cool project that does amazing things with data and APIs.</p>
-            <a href="#" class="text-info">View on GitHub</a>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <div class="card p-3">
-            <h5>Project Two</h5>
-            <p>A sleek web app built with React and Node.js.</p>
-            <a href="#" class="text-info">View on GitHub</a>
-          </div>
-        </div>
-        <!-- Add more project cards as needed -->
       </div>
     </section>
     
