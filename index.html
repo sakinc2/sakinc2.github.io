@@ -3,109 +3,185 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sakin Chowdhury Portfolio Website</title>
-  
+  <title>Sakin Chowdhury — Portfolio</title>
+
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+  <!-- Google Fonts: Poppins & Roboto Mono -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet" />
+
   <style>
-    /* AMOLED black background */
+    /* Root Styles */
     body {
-      background-color: #000000;
-      color: #eee;
+      background: #000;
+      color: #ddd;
+      font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       min-height: 100vh;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      position: relative;
       overflow-x: hidden;
+      line-height: 1.6;
+      scroll-behavior: smooth;
     }
-    /* Navbar dark with subtle transparency */
+
+    /* Navbar */
     .navbar {
-      background-color: rgba(18, 18, 18, 0.95);
-      position: relative;
+      background: rgba(18,18,18,0.95);
+      box-shadow: 0 2px 10px rgba(102,204,255,0.2);
+      font-weight: 600;
+      letter-spacing: 0.05em;
       z-index: 10;
     }
-    /* Black card style */
-    .card {
-      background-color: #121212;
-      border: none;
-      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
-      color: #eee;
-      border-radius: 12px;
-      transition: transform 0.2s ease;
+    .navbar-brand {
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: #66ccff !important;
+      letter-spacing: 0.1em;
     }
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.12);
-    }
-    /* Links in navbar */
     .nav-link {
-      color: #eee !important;
+      color: #ccc !important;
       font-weight: 600;
-      transition: color 0.2s ease;
+      margin-left: 1rem;
+      transition: color 0.3s ease;
     }
     .nav-link:hover {
       color: #66ccff !important;
+      text-shadow: 0 0 6px #66ccff;
     }
-    /* Section headings */
-    h2 {
-      margin-top: 2rem;
-      margin-bottom: 1.5rem;
-      font-weight: 700;
-      color: #66ccff;
+    .navbar-toggler-icon {
+      filter: invert(1);
     }
 
-    /* Animated wire/code background container */
+    /* Animated SVG wires */
     #animated-bg {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
-      height: 150px;
+      height: 160px;
       pointer-events: none;
       z-index: 1;
       overflow: visible;
     }
-    /* Thin horizontal lines */
     .line {
       stroke: #66ccff;
-      stroke-width: 1;
-      stroke-opacity: 0.3;
-      animation: moveLines 10s linear infinite;
+      stroke-width: 1.2;
+      stroke-opacity: 0.15;
+      animation: moveLines 12s linear infinite;
     }
-    /* Different speeds for each line */
     .line:nth-child(odd) {
-      animation-duration: 15s;
+      animation-duration: 16s;
     }
     .line:nth-child(even) {
-      animation-duration: 12s;
+      animation-duration: 13s;
+    }
+    @keyframes moveLines {
+      0% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -1200; }
     }
 
-    @keyframes moveLines {
-      0% {
-        stroke-dashoffset: 0;
+    /* Main Container */
+    main.container {
+      padding-top: 200px;
+      max-width: 800px;
+    }
+
+    /* Section Headers */
+    h2 {
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 700;
+      color: #66ccff;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid #66ccff;
+      padding-left: 0.8rem;
+    }
+
+    /* Cards */
+    .card {
+      background: #121212;
+      border: none;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(102,204,255,0.15);
+      color: #ddd;
+      padding: 2rem;
+      transition: all 0.3s ease;
+    }
+    .card:hover {
+      box-shadow: 0 12px 40px rgba(102,204,255,0.35);
+      transform: translateY(-8px);
+    }
+
+    /* Typed Text */
+    .typed-text {
+      color: #66ccff;
+      font-weight: 700;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1.3rem;
+      display: inline-block;
+      min-height: 1.5em;
+      margin-left: 8px;
+    }
+
+    /* Contact List */
+    #contact ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    #contact li {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+    #contact li i {
+      color: #66ccff;
+      margin-right: 0.7rem;
+      width: 20px;
+      text-align: center;
+    }
+    #contact a {
+      color: #66ccff;
+      text-decoration: none;
+      transition: text-shadow 0.3s ease;
+    }
+    #contact a:hover {
+      text-shadow: 0 0 8px #66ccff;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 576px) {
+      main.container {
+        padding-top: 150px;
+        padding-left: 1rem;
+        padding-right: 1rem;
       }
-      100% {
-        stroke-dashoffset: -1000;
+      .navbar-brand {
+        font-size: 1.5rem;
       }
     }
   </style>
 </head>
 <body>
-  
+
   <!-- Animated SVG background -->
-  <svg id="animated-bg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1000 150" >
-    <line class="line" x1="0" y1="20" x2="1000" y2="20" stroke-dasharray="20 10" />
-    <line class="line" x1="0" y1="50" x2="1000" y2="50" stroke-dasharray="15 5" />
-    <line class="line" x1="0" y1="80" x2="1000" y2="80" stroke-dasharray="25 15" />
-    <line class="line" x1="0" y1="110" x2="1000" y2="110" stroke-dasharray="10 10" />
+  <svg id="animated-bg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1000 160">
+    <line class="line" x1="0" y1="25" x2="1000" y2="25" stroke-dasharray="22 10" />
+    <line class="line" x1="0" y1="60" x2="1000" y2="60" stroke-dasharray="18 8" />
+    <line class="line" x1="0" y1="95" x2="1000" y2="95" stroke-dasharray="25 15" />
+    <line class="line" x1="0" y1="130" x2="1000" y2="130" stroke-dasharray="12 12" />
   </svg>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg sticky-top">
+  <nav class="navbar navbar-expand-lg sticky-top shadow-sm">
     <div class="container">
-      <a class="navbar-brand text-white fw-bold" href="#">Sakin Chowdhury</a>
+      <a class="navbar-brand" href="#">Sakin Chowdhury</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+        <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navMenu">
         <ul class="navbar-nav ms-auto">
@@ -115,34 +191,53 @@
       </div>
     </div>
   </nav>
-  
-  <!-- Main content -->
-  <main class="container py-5">
-    
-    <!-- About Section -->
-    <section id="about">
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <!-- About -->
+    <section id="about" class="mb-5 animate__animated animate__fadeInUp">
       <h2>About Me</h2>
-      <div class="card p-4 mb-5">
-        <p>Hello! I'm Sakin, a passionate software developer focused on building clean and efficient solutions. I love working on projects that combine modern UI with strong backend logic. Welcome to my portfolio.</p>
+      <div class="card">
+        <p>Hey, I’m Sakin — <span class="typed-text"></span></p>
+        <p>
+          Passionate software developer building clean, efficient solutions. I enjoy crafting modern UIs paired with solid backend logic.
+          This is my corner of the internet where I share my work and ideas.
+        </p>
       </div>
     </section>
-    
-    <!-- Contact Section -->
-    <section id="contact" class="mt-5">
+
+    <!-- Contact -->
+    <section id="contact" class="animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
       <h2>Contact</h2>
-      <div class="card p-4 mb-5">
-        <p>If you want to get in touch, feel free to reach out via email or LinkedIn!</p>
+      <div class="card">
         <ul>
-          <li>Email: <a href="mailto:sakinhchowdhury@gmail.com" class="text-info">sakinhchowdhury@gmail.com</a></li>
-          <li>LinkedIn: <a href="https://www.linkedin.com/in/sakin-chowdhury-75a94924a/" target="_blank" class="text-info">linkedin.com/in/sakin-chowdhury-75a94924a/</a></li>
-          <li>GitHub: <a href="https://github.com/sakinc2" target="_blank" class="text-info">github.com/sakinc2</a></li>
+          <li><i class="fas fa-envelope"></i><a href="mailto:sakinhchowdhury@gmail.com">sakinhchowdhury@gmail.com</a></li>
+          <li><i class="fab fa-linkedin"></i><a href="https://www.linkedin.com/in/sakin-chowdhury-75a94924a/" target="_blank" rel="noopener noreferrer">linkedin.com/in/sakin-chowdhury-75a94924a/</a></li>
+          <li><i class="fab fa-github"></i><a href="https://github.com/sakinc2" target="_blank" rel="noopener noreferrer">github.com/sakinc2</a></li>
         </ul>
       </div>
     </section>
-    
+
   </main>
 
-  <!-- Bootstrap JS Bundle -->
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script>
+    var typed = new Typed('.typed-text', {
+      strings: [
+        "a software developer.",
+        "a problem solver.",
+        "a lifelong learner.",
+        "your next great teammate."
+      ],
+      typeSpeed: 60,
+      backSpeed: 40,
+      backDelay: 1500,
+      loop: true
+    });
+  </script>
+
 </body>
 </html>
