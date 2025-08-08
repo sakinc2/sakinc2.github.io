@@ -5,20 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sakin Chowdhury — Portfolio</title>
 
-  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
-  <!-- Animate.css -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet" />
 
   <style>
-    /* Existing Styles ... */
+    :root {
+      --accent-color: #cfd1d4;
+      --accent-shadow: rgba(207, 209, 212, 0.4);
+      --accent-light: #e5e6e8;
+    }
     body {
       background: #000;
       color: #ddd;
@@ -27,11 +24,6 @@
       overflow-x: hidden;
       line-height: 1.6;
       scroll-behavior: smooth;
-    }
-    :root {
-      --accent-color: #9a8caa;
-      --accent-shadow: rgba(154, 140, 170, 0.5);
-      --accent-light: #bcb4d4;
     }
     .navbar {
       background: rgba(18,18,18,0.95);
@@ -44,8 +36,15 @@
       color: var(--accent-color) !important;
       letter-spacing: 0.1em;
     }
-    .nav-link { color: #ccc !important; font-weight: 600; margin-left: 1rem; }
-    .nav-link:hover { color: var(--accent-light) !important; text-shadow: 0 0 6px var(--accent-shadow); }
+    .nav-link {
+      color: #ccc !important;
+      font-weight: 600;
+      margin-left: 1rem;
+    }
+    .nav-link:hover {
+      color: var(--accent-light) !important;
+      text-shadow: 0 0 6px var(--accent-shadow);
+    }
     .card {
       background: #121212;
       border: none;
@@ -55,7 +54,10 @@
       padding: 2rem;
       transition: all 0.3s ease;
     }
-    .card:hover { box-shadow: 0 12px 40px var(--accent-shadow); transform: translateY(-8px); }
+    .card:hover {
+      box-shadow: 0 12px 40px var(--accent-shadow);
+      transform: translateY(-8px);
+    }
     h2 {
       font-family: 'Roboto Mono', monospace;
       font-weight: 700;
@@ -71,6 +73,48 @@
       margin: 0.2rem;
       padding: 0.6rem 0.8rem;
       border-radius: 8px;
+    }
+    /* Quote section styles */
+    #quote-section {
+      background: #000;
+      color: var(--accent-color);
+      font-family: 'Roboto Mono', monospace;
+      position: relative;
+      overflow: hidden;
+    }
+    .quote-text {
+      font-size: 1.6rem;
+      white-space: pre;
+      margin-bottom: 0;
+    }
+    .quote-divider {
+      border-top: 2px solid var(--accent-color);
+      width: 60%;
+      margin: 1rem auto;
+    }
+    .quote-translation {
+      color: var(--accent-light);
+      font-size: 1.1rem;
+      opacity: 0;
+      animation-delay: 2.5s;
+    }
+    #quote-section::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: repeating-linear-gradient(
+        180deg,
+        rgba(255,255,255,0.03) 0px,
+        rgba(255,255,255,0.03) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      animation: scrollBG 10s linear infinite;
+    }
+    @keyframes scrollBG {
+      from { background-position: 0 0; }
+      to { background-position: 0 100px; }
     }
   </style>
 </head>
@@ -99,6 +143,15 @@
       </div>
     </div>
   </nav>
+
+  <!-- Quote Section -->
+  <section id="quote-section" class="py-5 text-center">
+    <div class="container">
+      <pre class="quote-text" id="latin-quote"></pre>
+      <hr class="quote-divider">
+      <p class="quote-translation animate__animated animate__fadeIn" id="translation-text">I shall either find a way or make one</p>
+    </div>
+  </section>
 
   <!-- Main -->
   <main class="container py-5">
@@ -191,13 +244,28 @@
 
   </main>
 
-  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   <script>
     new Typed('.typed-text', {
       strings: ["a software developer.", "a problem solver.", "a lifelong learner.", "your next great teammate."],
       typeSpeed: 60, backSpeed: 40, backDelay: 1500, loop: true
+    });
+    document.addEventListener("DOMContentLoaded", function(){
+      let latinText = "Aut inveniam viam aut faciam";
+      let i = 0;
+      let speed = 60;
+      let target = document.getElementById("latin-quote");
+      function typeWriter() {
+        if (i < latinText.length) {
+          target.textContent += latinText.charAt(i);
+          i++;
+          setTimeout(typeWriter, speed);
+        } else {
+          document.getElementById("translation-text").style.opacity = 1;
+        }
+      }
+      typeWriter();
     });
   </script>
 
