@@ -268,7 +268,7 @@
       typeWriter();
     });
 
-    // Matrix background animation using requestAnimationFrame
+    // Matrix background animation using requestAnimationFrame and slower, brighter effect
     const canvas = document.getElementById("matrix-canvas");
     const ctx = canvas.getContext("2d");
 
@@ -286,20 +286,29 @@
     const letters = "アァイィウヴエェオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモヤユヨラリルレロワヲンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     const matrix = letters.split("");
 
-    function drawMatrix() {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "#cfd1d4"; // metallic grey matrix text
-      ctx.font = fontSize + "px monospace";
+    // Slow down animation with frame throttling
+    let lastTime = 0;
+    const fps = 15; // approx 15 frames per second
+    const interval = 1000 / fps;
 
-      for (let i = 0; i < drops.length; i++) {
-        const text = matrix[Math.floor(Math.random() * matrix.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+    function drawMatrix(time = 0) {
+      if (time - lastTime > interval) {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.12)"; // higher opacity for longer trails
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
+        ctx.fillStyle = "#e0e0e0"; // brighter matrix text
+        ctx.font = fontSize + "px monospace";
+
+        for (let i = 0; i < drops.length; i++) {
+          const text = matrix[Math.floor(Math.random() * matrix.length)];
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+          }
+          drops[i]++;
         }
-        drops[i]++;
+        lastTime = time;
       }
       requestAnimationFrame(drawMatrix);
     }
@@ -315,5 +324,3 @@
 
 </body>
 </html>
-<!-- End of HTML Document -->
-<!-- This code is a complete HTML document for a personal portfolio website, featuring a responsive design, a matrix background animation, and sections for about, skills, projects, experience, and contact information.
